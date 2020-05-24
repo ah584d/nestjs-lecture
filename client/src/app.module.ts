@@ -1,29 +1,30 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { Transport, ClientsModule } from '@nestjs/microservices';
+import { Transport, ClientsModule, ClientOptions, ClientKafka } from '@nestjs/microservices';
+import { ClientProviderOptions } from '@nestjs/microservices/module/interfaces/clients-module.interface';
 
+const clientProviderOptions: ClientProviderOptions = {
+	name: 'BILLING_SERVICE',
+	transport: Transport.TCP,
+	options: {
+		port : 9999
+	}
+};
 
 @Module({
 	imports: [
 		ClientsModule.register([
-			{ name: 'BILLING_SERVICE', transport: Transport.TCP },
-		]),
-		ClientsModule.register([
-			{
-			  name: 'HERO_SERVICE',
-			  transport: Transport.KAFKA,
-			  options: {
-				client: {
-				  clientId: 'hero',
-				  brokers: ['localhost:9092'],
-				},
-				consumer: {
-				  groupId: 'hero-consumer'
-				}
-			  }
-			},
-		  ]),
+			clientProviderOptions
+			// {
+			// 	name: 'BILLING_SERVICE',
+			// 	transport: Transport.TCP,
+			// 	options: {
+			// 		port : 9999
+			// 	}
+			// },
+		])
+			
 	],
 	controllers: [AppController],
 	providers: [AppService],

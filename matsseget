@@ -1,0 +1,17 @@
+
+
+
+
+Suppose you would like to simply notify another service that a certain condition has occurred
+in this part of the system. This is the ideal use case for the event-based message style.
+
+
+https://medium.com/@rajagoyal815/reliable-communication-with-message-queues-part1-cfd23d6bbfdc
+
+
+https://www.youtube.com/watch?v=IpoaVi9iPWI
+
+https://dev.to/nestjs/integrate-nestjs-with-external-services-using-microservice-transporters-part-1-p3
+event based communication
+
+bof code source https://medium.com/swlh/write-your-first-microservice-in-nest-js-841e10a86117

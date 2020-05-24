@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@nestjs/common';
-import { ClientProxy } from '@nestjs/microservices';
+import { ClientProxy, ClientKafka } from '@nestjs/microservices';
 import { Observable } from 'rxjs';
 
 export class UserEventStats {
@@ -11,17 +11,17 @@ export class AppService {
 	private flipFlop = true;
 
 	constructor(
-		@Inject('BILLING_SERVICE') private client: ClientProxy,
-	) {}
+		@Inject('BILLING_SERVICE') private client: ClientProxy) {}
 
 	private getRandom() :number {
 		return Math.floor(Math.random() * 100);
 	}
 
 	payment(): Observable<number> {
-		const pattern = { cmd: 'sum' };
+		const pattern = 'sum';
 		const payload = [this.getRandom(), this.getRandom(), this.getRandom()];
-		return this.client.send<number>(pattern, payload);
+						// .send<ReturnType, ParamType>(pattern, param)
+		return this.client.send<number, number[]>(pattern, payload);
 	}
 
 	async publishStats() {

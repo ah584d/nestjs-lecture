@@ -1,5 +1,6 @@
 import { Controller, Get, Post } from '@nestjs/common';
 import { AppService } from './app.service';
+import { Observable } from 'rxjs';
 
 @Controller()
 export class AppController {
@@ -10,25 +11,24 @@ export class AppController {
     return this.appService.getSystemHealth();
   }
 
-  @Post('/publish-stats')
-  async publishStats(): Promise<any> {
-	  try {
-		console.log(`publish stats as event`);
-		const result = await this.appService.publishStats();
+	@Post('/payment')
+	publishMsg(): Observable<number> {
+		try {
+		console.log(`sends msg`);
+		const result = this.appService.payment();
 		return result;
-	  } catch(err) {
-		  console.log(`event error: ${err}`);
-	  }
+		} catch(err) {
+			console.log(`msg error: ${err}`);
+		}
   }
 
-  @Post('/payment')
-  async publishMsg(): Promise<any> {
+  @Post('/publish-stats')
+  publishStats(): void {
 	  try {
-		console.log(`sends msg`);
-		const result = await this.appService.payment();
-		return result;
+		console.log(`publish stats as event`);
+		this.appService.publishStats();
 	  } catch(err) {
-		  console.log(`msg error: ${err}`);
+		  console.log(`event error: ${err}`);
 	  }
   }
 }
