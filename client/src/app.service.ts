@@ -24,6 +24,13 @@ export class AppService {
 		return this.client.send<number, number[]>(pattern, payload);
 	}
 
+	paymentAsynch(): Observable<number> {
+		const pattern = 'sumAsynch';
+		const payload = [this.getRandom(), this.getRandom(), this.getRandom()];
+						// .send<ReturnType, ParamType>(pattern, param)
+		return this.client.send<number, number[]>(pattern, payload);
+	}
+	
 	async publishStats() {
 		if(this.flipFlop) {
 			this.client.emit<number>('user_stats', new UserEventStats('/catalog/sku?34567', {'duration': Math.floor(this.getRandom()/2), 'origin': 'IL', 'profile': 'unknown'}));

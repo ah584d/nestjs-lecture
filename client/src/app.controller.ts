@@ -6,10 +6,10 @@ import { Observable } from 'rxjs';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get()
-  getSystemHealth(): string {
-    return this.appService.getSystemHealth();
-  }
+	@Get()
+	getSystemHealth(): string {
+		return this.appService.getSystemHealth();
+	}
 
 	@Post('/payment')
 	publishMsg(): Observable<number> {
@@ -20,15 +20,29 @@ export class AppController {
 		} catch(err) {
 			console.log(`msg error: ${err}`);
 		}
-  }
+	}
 
-  @Post('/publish-stats')
-  publishStats(): void {
-	  try {
-		console.log(`publish stats as event`);
-		this.appService.publishStats();
-	  } catch(err) {
-		  console.log(`event error: ${err}`);
-	  }
-  }
+	@Post('/paymentAsynch')
+	publishMsgAsynch(): number {
+		try {
+			console.log(`sends msg`);
+			const result = this.appService.paymentAsynch().subscribe((data:any)=>{
+				console.log(`result of asynch operation: ${data}`);
+				return result;
+			});
+		} catch(err) {
+			console.log(`msg error: ${err}`);
+		}
+		return undefined;
+	}
+
+	@Post('/publish-stats')
+	publishStats(): void {
+		try {
+			console.log(`publish stats as event`);
+			this.appService.publishStats();
+		} catch(err) {
+			console.log(`event error: ${err}`);
+		}
+	}
 }
