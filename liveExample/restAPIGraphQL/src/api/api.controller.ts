@@ -30,7 +30,7 @@ export class ApiController {
 	  return this.apiService.getUsers();
   }
 
-  @Get('/user/:id')
+  @Get('/users/:id')
   @HttpCode(200)
   getUser(@Param('id') id): any {
 	  return this.apiService.getUserById(id);
@@ -61,7 +61,7 @@ export class ApiController {
   }
 
 
-  @Post('/post/')
+  @Post('/post')
   @HttpCode(202)
   addPhone(@Body(new ValidationPipe()) post: PostDto): any {
 	  console.log(JSON.stringify(post));

@@ -1,9 +1,9 @@
-import { BlogType } from "../graphql/blogs/blog.type";
+import { PostType } from "../graphql/blogs/blog.type";
 import { Injectable } from "@nestjs/common";
 
 @Injectable()
 export class BlogsDB {
-    private blogs: BlogType[] = [
+    private blogs: PostType[] = [
 		{
 			"age": 0,
 			"id": "motorola-xoom-with-wi-fi",
@@ -159,18 +159,18 @@ export class BlogsDB {
 		}
 	]
 
-    getBlogs(): BlogType[]{ 
+    getBlogs(): PostType[]{ 
         return this.blogs; 
     }
     
-    getBlogById(id: string): BlogType { 
+    getBlogById(id: string): PostType { 
         const phone = this.blogs.find((phone) => phone.id === id)
         console.log(phone)
 
         return phone; 
     }
 
-    addBlog(newBlog : BlogType): BlogType {
+    addBlog(newBlog : PostType): PostType {
         return newBlog; 
     }
 
