@@ -28,9 +28,9 @@ export class BlogResolver {
         return this.postService.addPost(createBlogInput);
 	}
 	
-	@Query(returns => UserType)
-    postsTitlesPerUser(@Args('user') user: string) {
-        return this.postService.getUsers();
-    }
+	// @Query(returns => UserType)
+    // postsTitlesPerUser(@Args('user') user: string) {
+    //     return this.postService.getUsers();
+    // }
 	
 }

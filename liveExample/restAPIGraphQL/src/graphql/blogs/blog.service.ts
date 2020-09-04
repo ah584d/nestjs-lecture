@@ -14,9 +14,9 @@ export class BlogPostsService {
         return this.blogsDB.getBlogs();
     }
 
-	getUsers(): UserType[] {
-        return {};/ /this.blogsDB.getBlogs();
-	}
+	// getUsers(): UserType[] {
+    //     return this.blogsDB.getBlogs();
+	// }
 	
     getPostById(id: string): PostType {
         return this.blogsDB.getBlogById(id);
