@@ -11,12 +11,14 @@
 
 import { Controller, Get, HttpCode, Param, Post, Body } from '@nestjs/common';
 import { ApiService } from './services/api.service';
+import { DbService } from './services/db/db.service';
 import { PostDto } from './models/post.dto';
 import { ValidationPipe } from './pipes/validation.pipe';
 
 @Controller()
 export class ApiController {
-  constructor(private readonly apiService: ApiService) {}
+  constructor(private readonly apiService: ApiService,
+				private readonly dbService: DbService) {}
 
   @Get()
   getHello(): string {
@@ -27,39 +29,33 @@ export class ApiController {
   @Get('/users')
   @HttpCode(200)
   getUsers(): any {
-	  return this.apiService.getUsers();
+	  return this.dbService.getUsers();
   }
 
   @Get('/users/:id')
   @HttpCode(200)
-  getUser(@Param('id') id): any {
-	  return this.apiService.getUserById(id);
+  getUser(@Param('id') userId): any {
+	  return this.dbService.getUserById(userId);
   }
 
-  @Get('/posts')
+
+  @Get('users/:id/posts')
   @HttpCode(200)
-  getPosts(): any {
-	  return this.apiService.getPosts();
+  getPost(@Param('id') userId): any {
+	  return this.dbService.getPostByUserId(userId);
   }
 
-  @Get('/post/:id')
+  @Get('users/:id/followers')
   @HttpCode(200)
-  getPost(@Param('id') id): any {
-	  return this.apiService.getPostById(id);
+  getFollowers(@Param('id') userId): any {
+	  return this.dbService.getFollowers(userId);
   }
 
-  @Get('/followers')
+  @Get('users/:id/permissions')
   @HttpCode(200)
-  getFollowers(): any {
-	  return this.apiService.getFollowers();
+  getPermissions(@Param('id') userId): any {
+	  return this.apiService.getUserAuth(userId);
   }
-
-  @Get('/followers/user/:id')
-  @HttpCode(200)
-  getFollower(@Param('userId') userId): any {
-	  return this.apiService.getFollowersByUser(userId);
-  }
-
 
   @Post('/post')
   @HttpCode(202)

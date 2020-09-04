@@ -16,6 +16,7 @@ import { ApiController } from './api/api.controller';
 import { ApiService } from './api/services/api.service';
 import { ProxyService } from './services/proxy/proxy.service';
 import { BlogsModule } from './graphql/blogs.module';
+import { DbService } from './api/services/db/db.service';
 
 @Module({
   imports: [HttpModule,
@@ -27,6 +28,6 @@ import { BlogsModule } from './graphql/blogs.module';
 			BlogsModule
 		],
   controllers: [ApiController],
-  providers: [ApiService, ProxyService],
+  providers: [ApiService, ProxyService, DbService],
 })
 export class RootModule {}
