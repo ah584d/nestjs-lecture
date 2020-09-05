@@ -11,44 +11,41 @@
 
 import { Controller, Get, HttpCode, Param, Post, Body } from '@nestjs/common';
 import { ApiService } from './services/api.service';
-import { DbService } from './services/db/db.service';
 import { PostDto } from './models/post.dto';
 import { ValidationPipe } from './pipes/validation.pipe';
 
 @Controller()
 export class ApiController {
-  constructor(private readonly apiService: ApiService,
-				private readonly dbService: DbService) {}
+  constructor(private readonly apiService: ApiService) {}
 
   @Get()
   getHello(): string {
     return this.apiService.getHello();
   }
 
-
   @Get('/users')
   @HttpCode(200)
   getUsers(): any {
-	  return this.dbService.getUsers();
+	  return this.apiService.getUsers();
   }
 
   @Get('/users/:id')
   @HttpCode(200)
   getUser(@Param('id') userId): any {
-	  return this.dbService.getUserById(userId);
+	  return this.apiService.getUserById(userId);
   }
 
 
   @Get('users/:id/posts')
   @HttpCode(200)
   getPost(@Param('id') userId): any {
-	  return this.dbService.getPostByUserId(userId);
+	  return this.apiService.getPostByUserId(userId);
   }
 
   @Get('users/:id/followers')
   @HttpCode(200)
   getFollowers(@Param('id') userId): any {
-	  return this.dbService.getFollowers(userId);
+	  return this.apiService.getFollowers(userId);
   }
 
   @Get('users/:id/permissions')
@@ -57,7 +54,7 @@ export class ApiController {
 	  return this.apiService.getUserAuth(userId);
   }
 
-  @Post('/post')
+  @Post('/posts')
   @HttpCode(202)
   addPhone(@Body(new ValidationPipe()) post: PostDto): any {
 	  console.log(JSON.stringify(post));
