@@ -10,24 +10,23 @@
  * Decorators provide a way to add both annotations and a meta-programming syntax for class declarations and members
  */
 
-import { Module, HttpModule } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
-import { ApiController } from './api/api.controller';
 import { ApiService } from './api/services/api.service';
 import { ProxyService } from './services/proxy/proxy.service';
 import { BlogsModule } from './graphql/blogs.module';
 import { DbService } from './api/services/db/db.service';
+import { ApiModule } from './api/api.module';
 
 @Module({
-  imports: [HttpModule,
-
+  imports: [
 			GraphQLModule.forRoot({
 				autoSchemaFile: true
 			}),
 
-			BlogsModule
-		],
-  controllers: [ApiController],
-  providers: [ApiService, ProxyService, DbService],
+			BlogsModule,
+
+			ApiModule
+		]
 })
 export class RootModule {}

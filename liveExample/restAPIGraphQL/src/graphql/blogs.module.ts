@@ -2,13 +2,13 @@
 
 import { Module } from '@nestjs/common';
 import { BlogResolver } from './blogs/blog.resolver';
-import { BlogPostsService } from './blogs/blog.service';
-import { BlogsDB } from '../db/blogs';
+import { UserService } from './blogs/services/user.service';
+import { BlogsDB } from '../graphql/db/users';
 
 @Module({
   providers: [
     BlogResolver,
-    BlogPostsService,
+    UserService,
     BlogsDB
   ],
   exports: []

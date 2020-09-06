@@ -9,10 +9,11 @@
  * // מוסיף מאטה דאטה 
  */
 
-import { Controller, Get, HttpCode, Param, Post, Body } from '@nestjs/common';
+import { Controller, Get, HttpCode, Param, Post, Body, UseGuards } from '@nestjs/common';
 import { ApiService } from './services/api.service';
 import { PostDto } from './models/post.dto';
 import { ValidationPipe } from './pipes/validation.pipe';
+import { AuthGuard } from './guards/auth.guard'
 
 @Controller()
 export class ApiController {
@@ -49,14 +50,18 @@ export class ApiController {
   }
 
   @Get('users/:id/permissions')
+  @UseGuards(AuthGuard) // Guards are executed after each middleware, but before any interceptor or pipe.
   @HttpCode(200)
   getPermissions(@Param('id') userId): any {
 	  return this.apiService.getUserAuth(userId);
   }
 
+
+  // transformation: transform input data to the desired form (e.g., from string to integer)
+  // validation: evaluate input data and if valid, simply pass it through unchanged; otherwise, throw an exception when the data is incorrect
   @Post('/posts')
   @HttpCode(202)
-  addPhone(@Body(new ValidationPipe()) post: PostDto): any {
+  addPhone(@Body(new ValidationPipe()) post: PostDto): any { 
 	  console.log(JSON.stringify(post));
 	  return this.apiService.addPost(post);
   }
