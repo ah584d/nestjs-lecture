@@ -1,9 +1,9 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { Transport, MicroserviceOptions, NatsOptions } from '@nestjs/microservices';
+import { Transport, MicroserviceOptions } from '@nestjs/microservices';
 
 const microservicesOptionsTcp: MicroserviceOptions = {
-	transport: Transport.TCP,
+	transport: Transport.TCP, // <--- transport layer 
 	options: {
 		port : 9999,
 		retryAttempts: 3,
@@ -20,7 +20,8 @@ const microservicesOptionsNats: MicroserviceOptions = {
 	}
 };
 async function bootstrap() {
-	const appTcpTransport = await NestFactory.createMicroservice <MicroserviceOptions>(AppModule, microservicesOptionsNats);
+	 // ====> create micro service here
+	const appTcpTransport = await NestFactory.createMicroservice <MicroserviceOptions>(AppModule, microservicesOptionsTcp);
 	appTcpTransport.listen(() => console.log('Microservice is listening for event or messages'));
 }
 bootstrap();

@@ -24,7 +24,7 @@ const clientProviderOptionsNats: ClientProviderOptions = {
 @Module({
 	imports: [
 		ClientsModule.register([
-			clientProviderOptionsNats
+			clientProviderOptionsTcp
 		])
 			
 	],

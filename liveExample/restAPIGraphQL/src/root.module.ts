@@ -1,5 +1,5 @@
 /**
- * ORAL EXPLANATIONS:
+ *  EXPLANATIONS:
  * The root module of the application.
  * A module is a class annotated with a @Module() decorator.
  * The @Module() decorator provides metadata that Nest makes use of to organize the application structure.
@@ -12,11 +12,9 @@
 
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
-import { ApiService } from './api/services/api.service';
-import { ProxyService } from './services/proxy/proxy.service';
 import { BlogsModule } from './graphql/blogs.module';
-import { DbService } from './api/services/db/db.service';
 import { ApiModule } from './api/api.module';
+import { TcpModule } from './tcp/tcp.module';
 
 @Module({
   imports: [
@@ -26,7 +24,9 @@ import { ApiModule } from './api/api.module';
 
 			BlogsModule,
 
-			ApiModule
+			ApiModule,
+
+			TcpModule
 		]
 })
 export class RootModule {}

@@ -2,11 +2,10 @@
  * Basic controller sample with a single route.
  * Controllers are responsible for handling incoming requests and returning responses to the client.
  * 
- * ORAL EXPLANATIONS:
+ * EXPLANATIONS:
  * In order to create a basic controller, we use classes and decorators.
  * Decorators associate classes with required metadata and enable Nest to create a routing map
  * (tie requests to the corresponding controllers).
- * // מוסיף מאטה דאטה 
  */
 
 import { Controller, Get, HttpCode, Param, Post, Body, UseGuards } from '@nestjs/common';
@@ -49,14 +48,14 @@ export class ApiController {
 	  return this.apiService.getFollowers(userId);
   }
 
-  @Get('users/:id/permissions')
+  @Get('users/:id/permissions') // ---> request ---> middleware---> guard --> pipe --> Controller
   @UseGuards(AuthGuard) // Guards are executed after each middleware, but before any interceptor or pipe.
-  @HttpCode(200)
+  @HttpCode(200)        // it return true or fale, request can pass or not
   getPermissions(@Param('id') userId): any {
 	  return this.apiService.getUserAuth(userId);
   }
 
-
+  // 2 types of pipes:
   // transformation: transform input data to the desired form (e.g., from string to integer)
   // validation: evaluate input data and if valid, simply pass it through unchanged; otherwise, throw an exception when the data is incorrect
   @Post('/posts')

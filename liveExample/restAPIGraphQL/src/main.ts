@@ -1,5 +1,5 @@
 /**
- * ORAL EXPLANATIONS:
+ * EXPLANATIONS:
  * The entry file of the application which uses the core function NestFactory to create a Nest application instance.
  */
 

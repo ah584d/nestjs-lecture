@@ -6,7 +6,7 @@ import { delay } from 'rxjs/operators';
 
 
 @Controller()
-export class BillingController {
+export class LogicalController {
 
 	// define the message pattern for this method
 	@MessagePattern('sum')
@@ -23,7 +23,7 @@ export class BillingController {
 		return of(result).pipe(delay(5000));
 	}
 
-	@EventPattern('user_stats')
+	@EventPattern('user_session') // <---- Here we are using the event-based message style for implementing communication among the services
 	async handleUserStats(data: Record<string, unknown>) {
 	console.log(`Event received: ${JSON.stringify(data)}`);
 	}
