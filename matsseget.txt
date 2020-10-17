@@ -17,19 +17,7 @@ event based communication
 bof code source https://medium.com/swlh/write-your-first-microservice-in-nest-js-841e10a86117
 
 
-################## presentation ###############
-https://designer.mocky.io/
-
-https://run.mocky.io/v3/07a95ad1-211d-4751-b01c-38808d847029
-https://run.mocky.io/v3/83177c2e-57d4-4007-b1c7-6185ef6cb979
-
-phones array: https://run.mocky.io/v3/5d67803e-fd5b-4e95-9751-c63b541afc5a
-single phone: https://run.mocky.io/v3/b824f467-ac7d-4476-a846-93bfe944b8d9
-
-1. new project
-2. new service
-3. http service
-
-commands nestJS
-go to root folder:
-nest g service services/proxy
+decorator
+pipe, validation , transformation
+guard
+show working API
