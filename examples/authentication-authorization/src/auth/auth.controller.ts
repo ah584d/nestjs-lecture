@@ -31,8 +31,8 @@ export class AuthController {
 
   @Post('create')
   @HttpCode(HttpStatus.OK)
+  @Roles(Role.Admin)
   @UseGuards(RolesGuard)
-  @Roles(Role.User)
   createUSer(@Body() user: User) {
     return this.userService.createUser(user);
   }
